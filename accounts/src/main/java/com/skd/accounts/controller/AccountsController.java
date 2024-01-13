@@ -3,7 +3,6 @@ package com.skd.accounts.controller;
 import com.skd.accounts.dto.CustomerDto;
 import com.skd.accounts.dto.ErrorResponseDto;
 import com.skd.accounts.service.IAccountService;
-import com.skd.accounts.service.impl.AccountServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,12 +13,13 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/accounts")
+@RequestMapping(value = "/api/v1/accounts", produces = {MediaType.APPLICATION_JSON_VALUE})
 @RequiredArgsConstructor
 @Validated
 @Tag(name = "Rest APIs for accounts service"
