@@ -19,7 +19,7 @@ public class ErrorResponseDto {
 
     @Schema(
             description = "represents api path for which request failed",
-            example = "/api/v1/accounts/create"
+            example = "/api/v1/cards/create"
     )
     private  String apiPath;
 
@@ -31,7 +31,7 @@ public class ErrorResponseDto {
 
     @Schema(
             description = "represents message of error",
-            example = "Customer doesn't exist for given Mobile Number 7042364107"
+            example = "Cards doesn't exist for given Mobile Number 7042364107"
     )
     private  String errorMessage;
 
