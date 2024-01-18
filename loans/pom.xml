@@ -11,6 +11,7 @@
 	<groupId>com.skd</groupId>
 	<artifactId>loans</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>loans</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -68,6 +69,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<image>
+						<name>111190/${project.artifactId}:s1</name>
+					</image>cd
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

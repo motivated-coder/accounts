@@ -19,7 +19,7 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class LoansServiceImpl implements ILoansService {
 
-    private LoansRepository loansRepository;
+    private final LoansRepository loansRepository;
 
     /**
      * @param mobileNumber - Mobile Number of the Customer
