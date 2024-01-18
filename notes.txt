@@ -1,0 +1,2 @@
+> To create image using BuildPacks command is : mvn spring-boot:build-image
+> To create image using jib command is : mvn compile jib:dockerBuild

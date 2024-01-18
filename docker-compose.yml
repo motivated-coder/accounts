@@ -1,0 +1,37 @@
+services:
+  accounts:
+    image: "111190/accounts:s1"
+    container_name: "accounts_ms"
+    ports:
+      - 9080:9080
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - skd
+  cards:
+    image: "111190/cards:s1"
+    container_name: "cards_ms"
+    ports:
+      - 9081:9081
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - skd
+  loans:
+    image: "111190/loans:s1"
+    container_name: "loans_ms"
+    ports:
+      - 9082:9082
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - skd
+networks:
+  skd:
+    driver: "bridge"
