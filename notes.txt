@@ -1,2 +1,42 @@
 > To create image using BuildPacks command is : mvn spring-boot:build-image
 > To create image using jib command is : mvn compile jib:dockerBuild
+
+15 Factor methodologies
+-------------
+
+> One codebase, one application - Each application should have it's own one dedicated codebase. Configuration settings
+  should be maintained externally from the application codebase. Multiple deployment can exist across different
+  environments, all leveraging the same application artifact, rather than rebuilding the codebase for each environment.
+
+> API first - Adopting an API-first approach during the design phase of a cloud-native application allows other teams
+  to build their solutions based on that API when using the application as a backing service. Moreover, internal
+  modifications of the API implementation can be made without impacting other applications or teams that rely on it.
+
+  explanation : While building cloud native applications if we follow API-First approach it gives the opportunity to
+  other teams to build their solutions based on that API. How..let's say UI team is making use of one of APIs of our
+  application, so if we discuss the design of that API during the design phase of our application with other teams like
+  what is going to be the request payload and response of that API then other teams that are going to use that API can
+  make their solutions based on the request and response of that API. Also, since we have already done all the discussions
+  from every perspective while designing the API, there are almost no chances that we will modify the API on later stages
+  of the development, so in this way we can avoid impacting other applications or teams that rely on it.
+
+> Dependency Management - It is crucial to explicitly declare all the dependencies of an application in a manifest (like
+  and pom.xml) ensure that they are accessible to the dependency manager, which can download them from a central repository.
+
+  Explanation - Rather than using dependency management tools like maven or gradle if we (developers) are managing all
+  dependencies ourselves by adding them in the classpath (like we used to do before maven and gradle) then it is going to
+  make our application very very complex. So we should make used of dependency management tools like maven or gradle and
+  declare all dependencies in manifest file (like pom.xml or build.gradle)
+
+> Design, build, release, run - Codebase progression from design to production involves below stages.
+  Design stage  - Determine technologies, dependencies and tools for specific application. It also includes development
+                  and testing stages.
+  Build stage   - Compile and package the codebase with dependencies, creating an immutable artifact(build). Unique
+                  identification of the build artifact is essential.
+  Release stage - Combine the build with specific deployment configuration. Each release is immutable and uniquely
+                  identifiable
+  Run stage     - Execute the application in the designated runtime environment using a specific release.
+
+> Configuration, credentials and code - All those configurations that are going to be different for different environments
+  should not be embedded with the code or tracked in the same codebase, except for default configuration which can be
+  bundled with the application.
