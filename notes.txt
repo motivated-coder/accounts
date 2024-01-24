@@ -1,5 +1,16 @@
 > To create image using BuildPacks command is : mvn spring-boot:build-image
 > To create image using jib command is : mvn compile jib:dockerBuild
+-------
+
+spring.profiles.active=native
+
+Above property indicates that the configuration source is the local file system. When using native profiles, Spring Cloud
+Config Server looks for configuration files in the local file system rather than fetching them from a remote configuration
+server (e.g., Git).
+
+-------
+
+> If you added @ConfigurationProperties on top of any class, then no need to add @Component on top of that class.
 
 15 Factor methodologies
 -------------

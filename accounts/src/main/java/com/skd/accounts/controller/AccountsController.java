@@ -1,5 +1,6 @@
 package com.skd.accounts.controller;
 
+import com.skd.accounts.dto.AccountsContactDto;
 import com.skd.accounts.dto.CustomerDto;
 import com.skd.accounts.dto.ErrorResponseDto;
 import com.skd.accounts.service.IAccountService;
@@ -12,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,10 @@ import org.springframework.web.bind.annotation.*;
         ,description = "CRUD operations for accounts service")
 public class AccountsController {
 
+    @Value("${build.info}")
+    private String buildInfo;
+
+    private final AccountsContactDto accountsContactDto;
     private final IAccountService accountService;
 
     @Operation(
@@ -127,5 +133,44 @@ public class AccountsController {
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(false);
         }
+    }
+
+    @Operation(
+            summary = "api to get build info details",
+            description = "This api provides build info details of application"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status SUCCESSFUL"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status INTERNAL SERVER ERROR"
+            )
+    }
+    )
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo(){
+        return ResponseEntity.ok(buildInfo);
+    }
+
+    @Operation(
+            summary = "api to get contact info details ",
+            description = "This api provides contact details of developer and support team"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status SUCCESSFUL"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status INTERNAL SERVER ERROR"
+            )
+    })
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactDto> getSupportContact(){
+        return ResponseEntity.ok(accountsContactDto);
     }
 }

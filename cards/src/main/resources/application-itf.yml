@@ -1,5 +1,5 @@
 server:
-  port: 9080
+  port: 9081
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
@@ -14,14 +14,12 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  profiles:
-    active: itf
 
 build:
-  info: 0.0.1-SNAPSHOT
+  info: 0.0.1-RELEASE
 
-accounts:
-  message: "Welcome to SKD Bank accounts service, environment - local "
+cards:
+  message: "Welcome to SKD Bank cards service, environment - ITF "
   contactDetails:
     name: "Sumeet Dwivedi - Developer"
     email: "sumeet@skdbank.com"
