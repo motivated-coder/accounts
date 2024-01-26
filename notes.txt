@@ -10,6 +10,12 @@ server (e.g., Git).
 
 -------
 
+spring.config.import="optional:configserver:http://localhost:9083/"
+
+> use optional if you want to start your application even if it is not able to connect to configserver during startup
+
+-------
+
 > If you added @ConfigurationProperties on top of any class, then no need to add @Component on top of that class.
 
 15 Factor methodologies
