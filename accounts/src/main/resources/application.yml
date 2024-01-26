@@ -16,6 +16,8 @@ spring:
     show-sql: true
   profiles:
     active: itf
+  application:
+    name: "accounts"
 
 build:
   info: 0.0.1-SNAPSHOT

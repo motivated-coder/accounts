@@ -14,16 +14,12 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  profiles:
-    active: itf
-  application:
-    name: "cards"
 
 build:
-  info: 0.0.1-SNAPSHOT
+  info: 1.0.0
 
 cards:
-  message: "Welcome to SKD Bank cards service, environment - local "
+  message: "Welcome to SKD Bank cards service, environment - PROD "
   contactDetails:
     name: "Sumeet Dwivedi - Developer"
     email: "sumeet@skdbank.com"
