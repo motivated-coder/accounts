@@ -1,0 +1,12 @@
+
+build:
+  info: 0.0.1-RELEASE
+
+accounts:
+  message: "Welcome to SKD Bank accounts service, environment - ITF "
+  contactDetails:
+    name: "Sumeet Dwivedi - Developer"
+    email: "sumeet@skdbank.com"
+  onCallSupport:
+    - (555) 555-1234
+    - (555) 523-1345
