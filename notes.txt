@@ -10,6 +10,16 @@ server (e.g., Git).
 
 -------
 
+use encrypt.key in application.yml of configserver to provide functionality of encryption and decryption of external
+configuration values. It also exposes endpoints like (/encrypt, /decrypt, POST) which returns encrypted values of given text.
+
+-------
+
+If you are using encrypted values in your configuration files in place of original text then add prefix {cipher} so that
+configserver can identify that particular value and decrypt it before sending it back to microservices.
+
+-------
+
 spring.config.import="optional:configserver:http://localhost:9083/"
 
 > use optional if you want to start your application even if it is not able to connect to configserver during startup
