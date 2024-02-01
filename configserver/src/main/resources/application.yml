@@ -28,6 +28,12 @@ spring:
 #          username: sumeetnkrishna@gmail.com
 #          password: Adq104@skd
 
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
 management:
   endpoints:
     web:
