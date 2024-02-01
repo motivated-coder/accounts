@@ -20,3 +20,9 @@ spring:
     name: "cards"
   config:
     import: "optional:configserver:http://localhost:9083/"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

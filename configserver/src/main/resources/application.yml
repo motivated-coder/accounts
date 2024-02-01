@@ -3,25 +3,37 @@ server:
 
 spring:
   profiles:
-#    active: git
-    active: native
+    active: git
+#    active: native
   application:
     name: "configserver"
   cloud:
     config:
       server:
-#          token: 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
-        native:
-         search-locations: "classpath:/config"
+
+#        native:
+#         search-locations: "classpath:/config"
 #         search-locations: "file:///C://Users//er_sk//Downloads//config"
-#        git:
-#          uri: https://github.com/wanderer-skd/config.git
-#          default-label: main
-#          timeout: 5
-#          clone-on-start: true
-#          force-pull: true
+        git:
+          uri: "C://Users//er_sk//OneDrive//Desktop//config"
+#          uri: https://github.com/motivated-coder/config
+#          username: motivated-coder
+#          password: Adq104@skd
+#          token: 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
+#          skipSslValidation: true
+          default-label: master
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
 #          username: sumeetnkrishna@gmail.com
 #          password: Adq104@skd
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 
 encrypt:
   key: "skd"
