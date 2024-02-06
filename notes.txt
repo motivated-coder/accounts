@@ -1,33 +1,57 @@
+
+Notes : Important Points
+
+-------
 > To create image using BuildPacks command is : mvn spring-boot:build-image
 > To create image using jib command is : mvn compile jib:dockerBuild
 -------
-
 spring.profiles.active=native
 
 Above property indicates that the configuration source is the local file system. When using native profiles, Spring Cloud
 Config Server looks for configuration files in the local file system rather than fetching them from a remote configuration
 server (e.g., Git).
-
 -------
-
 use encrypt.key in application.yml of configserver to provide functionality of encryption and decryption of external
 configuration values. It also exposes endpoints like (/encrypt, /decrypt, POST) which returns encrypted values of given text.
-
 -------
-
 If you are using encrypted values in your configuration files in place of original text then add prefix {cipher} so that
 configserver can identify that particular value and decrypt it before sending it back to microservices.
-
 -------
-
 spring.config.import="optional:configserver:http://localhost:9083/"
 
 > use optional if you want to start your application even if it is not able to connect to configserver during startup
-
+-------
+> If you added @ConfigurationProperties on top of any class, then no need to add @Component on top of that class.
+-------
+> In docker compose file, whenever you try to add any environment variable, syntax is all letters should be in capital
+letters and . (dot) will be replaced by _ (underscore)
+-------
+> If 2 services are in same network (containers) they can call each other via service name
 -------
 
-> If you added @ConfigurationProperties on top of any class, then no need to add @Component on top of that class.
+<groupid>org.springframework.cloud</groupid>
+<artifactId>spring-cloud-config-monitor</artifactId>
 
+> This dependency generates an endpoint /monitor
+Please note : This api doesn't come under actuator. This is a rest api that is provided by config server
+-------
+-------
+Login and start the CLI with those commands
+
+hookdeck login --cli-key 2q6zaijt1o3m3ue5jvfmj1vitgk68v8wu5ah8lm88as76t781e
+hookdeck listen PORT Source
+
+-------
+/actuator/health/liveness
+/actuator/health/readiness
+
+to access these health endpoints, some configuration is needed in .yml file. check application.yml file of config server
+-------
+why there are 2 ports (5672, 15672) defined in the image of rabbitmq?
+Ans : There are 2 components : 1 takes care of management of the rabbitmq, other takes care of core activities
+-------
+-------
+-------
 15 Factor methodologies
 -------------
 
