@@ -28,7 +28,7 @@ public class CustomerDto {
 
     @Schema(
             description = "Email of the customer",
-            example = "SumeetDwivedi11@outlook.com"
+            example = "sumeet@skdbank.com"
     )
     @NotEmpty(message = "email can't be null or empty")
     @Email(message = "invalid email format")
@@ -36,7 +36,7 @@ public class CustomerDto {
 
     @Schema(
             description = "Mobile Number of the customer",
-            example = "7042364107"
+            example = "123456789"
     )
     @NotEmpty(message = "mobileNumber can't be null or empty")
     @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")

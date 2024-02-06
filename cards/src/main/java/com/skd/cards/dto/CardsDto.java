@@ -18,12 +18,12 @@ import lombok.NoArgsConstructor;
 public class CardsDto {
     @NotEmpty
     @Pattern(regexp = "(^$|[0-9]{10})", message = "MobileNumber must be of 10 digits")
-    @Schema(description = "Mobile Number of a customer", example = "7042364107")
+    @Schema(description = "Mobile Number of a customer", example = "123456789")
     private String mobileNumber;
 
     @NotEmpty(message = "CardNumber can't be null or empty")
     @Pattern(regexp = "(^$|[0-9]{12})", message = "CardNumber must be 12 digits")
-    @Schema(description = "Card Number of card", example = "127042364107")
+    @Schema(description = "Card Number of card", example = "12123456789")
     private String cardNumber;
 
     @Schema(description = "CardType of a card", example = "CREDIT CARD")

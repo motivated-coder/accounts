@@ -31,7 +31,7 @@ public class ErrorResponseDto {
 
     @Schema(
             description = "represents message of error",
-            example = "Customer doesn't exist for given Mobile Number 7042364107"
+            example = "Customer doesn't exist for given Mobile Number 123456789"
     )
     private  String errorMessage;
 
