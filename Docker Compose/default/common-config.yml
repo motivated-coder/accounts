@@ -3,9 +3,22 @@ services:
     networks:
       - skd
 
+  microservice-db-config:
+    extends:
+      service: network-deploy-service
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 10s
+      retries: 10
+      interval: 10s
+      start_period: 10s
+
   microservice-base-config:
     extends:
-      service : network-deploy-service
+      service: network-deploy-service
     deploy:
       resources:
         limits:
@@ -15,10 +28,12 @@ services:
 
   microservice-service-config:
     extends:
-      service : microservice-base-config
+      service: microservice-base-config
     environment:
       SPRING_CONFIG_IMPORT: configserver:http://configserver:9083/
       SPRING_PROFILES_ACTIVE: default
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
     depends_on:
       configserver:
         condition: service_healthy
