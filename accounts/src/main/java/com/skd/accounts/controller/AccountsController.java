@@ -1,9 +1,11 @@
 package com.skd.accounts.controller;
 
 import com.skd.accounts.dto.AccountsContactDto;
+import com.skd.accounts.dto.CustomerDetailsDto;
 import com.skd.accounts.dto.CustomerDto;
 import com.skd.accounts.dto.ErrorResponseDto;
 import com.skd.accounts.service.IAccountService;
+import com.skd.accounts.service.ICustomerDetailsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -33,6 +35,7 @@ public class AccountsController {
 
     private final AccountsContactDto accountsContactDto;
     private final IAccountService accountService;
+    private final ICustomerDetailsService customerDetailsService;
 
     @Operation(
             summary = "api to create account",
@@ -63,6 +66,24 @@ public class AccountsController {
                                                     @Pattern(regexp = "(^$|[0-9]{10})", message = "mobileNumber must be 10 digits")
                                                     String mobileNumber) {
         CustomerDto responseBody = accountService.fetch(mobileNumber);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(responseBody);
+    }
+
+    @Operation(
+            summary = "api to fetch customer details with loans and cards",
+            description = "This api provides functionality to fetch customer, loan and cards details of existing customer by mobileNumber"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP Status SUCCESSFUL"
+    )
+    @GetMapping("/fetch/customer-details")
+    public ResponseEntity<CustomerDetailsDto> fetchCustomerDetails(@RequestParam
+                                                    @Pattern(regexp = "(^$|[0-9]{10})", message = "mobileNumber must be 10 digits")
+                                                    String mobileNumber) {
+        CustomerDetailsDto responseBody = customerDetailsService.getCustomerDetails(mobileNumber);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(responseBody);

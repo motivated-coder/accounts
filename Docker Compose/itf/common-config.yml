@@ -31,6 +31,7 @@ services:
       service: microservice-base-config
     environment:
       SPRING_CONFIG_IMPORT: configserver:http://configserver:9083/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
       SPRING_PROFILES_ACTIVE: itf
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
