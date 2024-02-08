@@ -47,11 +47,33 @@ hookdeck listen PORT Source
 
 to access these health endpoints, some configuration is needed in .yml file. check application.yml file of config server
 -------
+
 why there are 2 ports (5672, 15672) defined in the image of rabbitmq?
 Ans : There are 2 components : 1 takes care of management of the rabbitmq, other takes care of core activities
+
+-------
+
+We should always start gateway server (api gateway/edge server) at last (after starting all services) because on startup
+edge server is going to fetch routing information regarding services from eureka server. If any service is not started then eureka
+server will not be able to provide information of that particular service.
+
+-------
+
+@Bean RouteLocator
+Api gateway server on startup checks if bean of type RouteLocator is available, if found it is confirmed that some custom routes
+is applied and gateway server considers that for routing
+
+-------
+
+> Whenever you want your filter to be executed for all king of traffic/requests that is going to be received by gateway server,
+ implements GlobalFilter
 -------
 -------
 -------
+-------
+
+
+
 15 Factor methodologies
 -------------
 
