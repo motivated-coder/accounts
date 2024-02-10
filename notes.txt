@@ -67,9 +67,25 @@ is applied and gateway server considers that for routing
 
 > Whenever you want your filter to be executed for all king of traffic/requests that is going to be received by gateway server,
  implements GlobalFilter
+
 -------
+some important actuator endpoints to remember
+
+ localhost:apigateway_port/actuator/gateway/routes
+ localhost:8060/actuator/circuitbreakers?name=%22accountCircuitBreaker%22
+ localhost:8060/actuator/circuitbreakerevents?name=%22accountCircuitBreakerConfig%22
+
 -------
+
+If Spring Cloud CircuitBreaker is on the classpath and spring.cloud.openfeign.circuitbreaker.enabled=true, Feign will wrap
+all methods with a circuit breaker. For ex: If there are 2 feign clients cards and loan inside accounts and if you add
+circuitbreaker on the classpath and add that property then feign will add circuit breaker automatically to all the feign
+clients inside accounts service i.e loans and cards.8
+
 -------
+when you add retryExceptions then no need to add ignoreExceptions
+-------
+Retry and RateLimiter implementations are different in apigateway and other services
 -------
 
 

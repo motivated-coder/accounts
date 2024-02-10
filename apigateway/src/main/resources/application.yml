@@ -10,6 +10,16 @@ spring:
         locator:
           enabled: false
           lowerCaseServiceId: true
+      httpclient:
+        connect-timeout: 5000
+        response-timeout: 5s
+  data: #configuration for RedisRateLimiter
+    redis:
+      connect-timeout: 2s
+      host: localhost
+      port: 6379
+      timeout: 1s
+
   rabbitmq:
     host: "localhost"
     port: 5672
@@ -39,4 +49,12 @@ logging:
     com:
       skd:
         apigateway: DEBUG
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000
 

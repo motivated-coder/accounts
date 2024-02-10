@@ -6,6 +6,8 @@ import com.skd.accounts.dto.CustomerDto;
 import com.skd.accounts.dto.ErrorResponseDto;
 import com.skd.accounts.service.IAccountService;
 import com.skd.accounts.service.ICustomerDetailsService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,6 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/api/v1/accounts", produces = {MediaType.APPLICATION_JSON_VALUE})
 @RequiredArgsConstructor
+@Slf4j
 @Validated
 @Tag(name = "Rest APIs for accounts service"
         ,description = "CRUD operations for accounts service")
@@ -70,7 +74,6 @@ public class AccountsController {
                 .status(HttpStatus.OK)
                 .body(responseBody);
     }
-
     @Operation(
             summary = "api to fetch customer details with loans and cards",
             description = "This api provides functionality to fetch customer, loan and cards details of existing customer by mobileNumber"
@@ -171,9 +174,16 @@ public class AccountsController {
             )
     }
     )
+    @Retry(name = "getBuildInfoRetry", fallbackMethod = "getBuildInfoFallBack")
     @GetMapping("/build-info")
     public ResponseEntity<String> getBuildInfo(){
+        log.info("getBuildInfo method Invoked");
+//        throw new NullPointerException();
         return ResponseEntity.ok(buildInfo);
+    }
+    public ResponseEntity<String> getBuildInfoFallBack(Throwable throwable){
+        log.info("getBuildInfoFallback method Invoked");
+        return ResponseEntity.ok("0.9");
     }
 
     @Operation(
@@ -190,8 +200,15 @@ public class AccountsController {
                     description = "HTTP Status INTERNAL SERVER ERROR"
             )
     })
+    @RateLimiter(name = "getSupportContactRateLimiter", fallbackMethod = "getSupportContactFallBack")
     @GetMapping("/contact-info")
     public ResponseEntity<AccountsContactDto> getSupportContact(){
         return ResponseEntity.ok(accountsContactDto);
+    }
+
+    public ResponseEntity<AccountsContactDto> getSupportContactFallBack(Throwable throwable){
+        AccountsContactDto response = new AccountsContactDto();
+        response.setMessage("Welcome to SKD Bank accounts service, environment - local, Contact person - Sumeet Dwivedi, email - skd@skdbank.com");
+        return ResponseEntity.ok(response);
     }
 }

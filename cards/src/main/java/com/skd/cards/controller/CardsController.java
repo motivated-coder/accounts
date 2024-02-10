@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Validated
 @RequestMapping(value = "/api/v1/cards", produces =  {MediaType.APPLICATION_JSON_VALUE})
+@Slf4j
 @Tag(
         name = "Rest APIs for Cards service",
         description = "CRUD Rest APIs for Cards service in SKD BANK"
@@ -75,6 +77,7 @@ public class CardsController {
     public ResponseEntity<CardsDto> fetchCardDetails(@RequestParam
                                                      @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile Number must be 10 digits")
                                                      String mobileNumber) {
+        log.info("fetching card details");
         CardsDto responseBody = cardService.fetchCardDetails(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
