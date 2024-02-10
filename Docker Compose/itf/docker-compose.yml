@@ -1,5 +1,18 @@
 services:
 
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: [ "CMD-SHELL", "redis-cli ping | grep PONG" ]
+      timeout: 10s
+      retries: 10
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
   eurekaserver:
     image: 111190/eurekaserver:s1
     container_name: eurekaserver_ms
@@ -154,6 +167,7 @@ services:
     extends:
       file: common-config.yml
       service: microservice-service-config
+
   apigateway:
     image: 111190/apigateway:s1
     container_name: apigateway_ms
@@ -164,6 +178,10 @@ services:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:9083/
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+      SPRING_DATA_REDIS_CONNECT-TIMEOUT: 2s
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      SPRING_DATA_REDIS_TIMEOUT: 1s
     depends_on:
       loans:
         condition: service_healthy
@@ -172,6 +190,8 @@ services:
       cards:
         condition: service_healthy
       eurekaserver:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     extends:
       file: common-config.yml
