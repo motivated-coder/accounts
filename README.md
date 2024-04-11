@@ -1,6 +1,6 @@
 ## Project Details
 In this project there are 3 different microservices interacting with each other. Different Technologies are being used in this project like
-apgateway, eurekaserver, configserver, Docker, Kubernetes, kafka, openfeign, spring security using keycloak Authorization server etc.
+apigateway, eurekaserver, configserver, Docker, Kubernetes, kafka, openfeign, spring security using keycloak Authorization server etc.
 ## Maven Commands used in the course
 
 |     Maven Command       |     Description          |
